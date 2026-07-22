@@ -2,6 +2,7 @@
 
 ## Now
 - [x] "You're Absolutely Right!" in big block letters
+- [x] "You're Absolutely Slopped™" leaderboard with mock data (`data/mock-slop.js` mimics the shape the real scraper should produce — swap that file for live data)
 
 ## Future: The Slop Leaderboard
 An automatically updating leaderboard of the most egregiously AI-slopped LinkedIn posts by cringey "thought leaders".

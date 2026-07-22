@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>You're Absolutely Slopped Leaderboard — Official Rankings</title>
+  <link rel="stylesheet" href="leaderboard.css">
+</head>
+<body>
+  <header class="masthead">
+    <a class="home-link" href="index.html">← thisistheunlockthatchangeseverything.ai</a>
+    <div class="sanction">Officially sanctioned by the International Federation of Slop Appreciation (IFSA)</div>
+    <h1>You're Absolutely Slopped<span class="tm">™</span></h1>
+    <p class="subtitle">Leaderboard</p>
+    <p class="season">
+      <span class="live-dot" aria-hidden="true"></span>
+      Season 3 &middot; Live Rankings &middot; Last appraisal: <span id="last-appraisal">—</span>
+    </p>
+  </header>
+
+  <section class="stats-bar" id="stats-bar" aria-label="Season statistics"></section>
+
+  <main>
+    <div class="table-intro">
+      <h2>Official Rankings</h2>
+      <p>
+        Celebrating the finest artisanal, copy-pasted, engagement-farmed content on
+        LinkedIn and X. Each prized exhibit has been hand-appraised by our panel of
+        certified slop sommeliers. Click <em>View Exhibit</em> to inspect a
+        contestant's finest work, with the most exquisite passages highlighted and
+        annotated by the judges.
+      </p>
+    </div>
+
+    <div class="table-scroll">
+      <table id="leaderboard">
+        <thead>
+          <tr>
+            <th class="col-rank">Rank</th>
+            <th>Contestant</th>
+            <th>Platform</th>
+            <th>Signature Technique</th>
+            <th class="col-score">Slop Index™</th>
+            <th class="col-exhibit">Prized Exhibit</th>
+          </tr>
+        </thead>
+        <tbody><!-- rendered by leaderboard.js --></tbody>
+      </table>
+    </div>
+
+    <section class="methodology">
+      <h3>Methodology</h3>
+      <p>
+        The Slop Index™ is computed by our proprietary SLOP-9000 Appraisal Engine,
+        which weighs em-dash density, "It's not X — it's Y" constructions,
+        unprompted vulnerability, deceased-relative-to-KPI pivots, unremoved AI
+        artifacts, and repost solicitations. Scores are peer-reviewed by a rotating
+        panel of judges who have read LinkedIn sober.
+      </p>
+      <p class="disclaimer">
+        All contestants and exhibits are fictional demonstration data pending our live
+        ingestion pipeline. Any resemblance to real thought leaders is statistically
+        inevitable.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span class="seal" aria-hidden="true">🏆</span>
+    Certified 100% Organic, Free-Range, Artisanal Slop &middot; Est. 2026
+  </footer>
+
+  <!-- Exhibit viewer modal -->
+  <div class="modal-backdrop" id="modal-backdrop" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" id="modal-close" aria-label="Close exhibit">✕</button>
+      <div class="modal-content" id="modal-content"><!-- rendered by leaderboard.js --></div>
+    </div>
+  </div>
+
+  <script src="data/mock-slop.js"></script>
+  <script src="leaderboard.js"></script>
+</body>
+</html>

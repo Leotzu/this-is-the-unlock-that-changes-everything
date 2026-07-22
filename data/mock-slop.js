@@ -1,6 +1,6 @@
 // Mock leaderboard data.
 // This file mimics the shape the real scraper pipeline will eventually produce,
-// so swapping in live LinkedIn/X data should only mean replacing this file
+// so swapping in live LinkedIn data should only mean replacing this file
 // (or fetching JSON of the same shape from an API).
 //
 // All contestants are fictional. Any resemblance to real thought leaders is
@@ -115,9 +115,9 @@ window.SLOP_DATA = {
       movement: "down",
       movementAmount: 1,
       name: "Tanner Disruptsson",
-      handle: "tannerdisrupts",
-      headline: "@tannerdisrupts | 12x Viral Thread Boi | DMs Open (please)",
-      platform: "X",
+      handle: "tanner-disruptsson",
+      headline: "Growth Architect | 12x Viral Post Boi | DMs Open (please)",
+      platform: "LinkedIn",
       slopIndex: 94.1,
       signature: "The Parasocial Study Grind",
       exhibit: {
@@ -129,15 +129,15 @@ window.SLOP_DATA = {
         paragraphs: [
           { text: "I spent 1,000 hours studying MrBeast's first 100 videos so you don't have to.",
             note: "One thousand hours — 125 consecutive workdays — watching a YouTuber, presented as a personal sacrifice on the reader's behalf. The dedication to the bit is magnificent. The bit is his life." },
-          { text: "Here are 11 brutal lessons about attention (number 7 will rewire your brain): 🧵",
-            note: "Note the promise of neurological restructuring via tweet. Bold tannins." },
+          { text: "Here are 11 brutal lessons about attention (number 7 will rewire your brain) 👇",
+            note: "Note the promise of neurological restructuring via LinkedIn post. Bold tannins." },
           { text: "Most people watch videos." },
           { text: "Killers reverse-engineer them.",
             note: "\"Killers.\" He means people who watch videos while taking notes. The register inflation here is world-class — every hobby a war, every spreadsheet a weapon." },
           { text: "Lesson 7: The human brain is a slot machine. Your thumbnail is the lever. Pull it.",
             note: "The promised brain-rewirer. It is a metaphor about levers. Our judges' brains remain, regrettably, wired as before." },
-          { text: "If this thread hit different: RT the first tweet. My DMs are open. I have a Notion template.",
-            note: "The triple call-to-action finish — retweet, DM, Notion template — a classic X-style digestif. Notes of desperation, beautifully balanced." },
+          { text: "If this post hit different: repost it. My DMs are open. I have a Notion template.",
+            note: "The triple call-to-action finish — repost, DM, Notion template — a classic digestif. Notes of desperation, beautifully balanced." },
         ],
       },
     },
@@ -176,9 +176,9 @@ window.SLOP_DATA = {
       movement: "down",
       movementAmount: 2,
       name: "Blake Sigmason",
-      handle: "sigmablake",
-      headline: "@sigmablake | War Against My Former Self (Ongoing) | Protocol Salesman",
-      platform: "X",
+      handle: "blake-sigmason",
+      headline: "Founder, The 3:47am Club | War Against My Former Self (Ongoing) | Protocol Salesman",
+      platform: "LinkedIn",
       slopIndex: 91.3,
       signature: "The Discipline LARP",
       exhibit: {
@@ -193,8 +193,8 @@ window.SLOP_DATA = {
           { text: "It's not a routine — it's a war against your former self.",
             note: "\"It's not X — it's Y\" with a side of self-annihilation. The em-dash carries the entire load. Muscular, aggressive, faintly damp from the cold plunge." },
           { text: "99% of men will scroll past this." },
-          { text: "If you're the 1%: reply \"WOLF\" and I'll DM you my morning protocol (usually $997, free for the next 17 minutes).",
-            note: "The funnel reveals itself: statistics invented, masculinity flattered, and a $997 PDF discounted by 100% for exactly 17 minutes. The judges replied \"WOLF.\" We are still waiting. We will always be waiting." },
+          { text: "If you're the 1%: comment \"WOLF\" and I'll DM you my morning protocol (usually $997, free for the next 17 minutes).",
+            note: "The funnel reveals itself: statistics invented, masculinity flattered, and a $997 PDF discounted by 100% for exactly 17 minutes. The judges commented \"WOLF.\" We are still waiting. We will always be waiting." },
         ],
       },
     },

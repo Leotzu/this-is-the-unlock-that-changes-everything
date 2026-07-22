@@ -42,16 +42,29 @@
       <rect x="12" y="0" width="3.5" height="14" rx="1" fill="#4d8dff"/>
     </svg>`;
 
+  // Red (maximum slop) through orange to yellow (merely impressive slop)
+  function slopColor(score) {
+    const hue = Math.max(0, Math.min(70, (100 - score) * 3));
+    return `hsl(${hue}, 88%, 55%)`;
+  }
+
   function gaugeIcon(score) {
-    const len = 37.7; // arc length of the semicircle, r = 12
-    const filled = (score / 100) * len;
+    const color = slopColor(score);
+    const rad = (score / 100) * Math.PI; // needle angle, 0 = left, 100 = right
+    const x = 14 - 9.5 * Math.cos(rad);
+    const y = 14 - 9.5 * Math.sin(rad);
     return `
-      <svg class="gauge" width="30" height="17" viewBox="0 0 28 16" aria-hidden="true">
-        <path d="M2 14 A 12 12 0 0 1 26 14" fill="none" stroke="#23386e" stroke-width="3.5" stroke-linecap="round"/>
-        <path d="M2 14 A 12 12 0 0 1 26 14" fill="none" stroke="#8b7bff" stroke-width="3.5" stroke-linecap="round"
-          stroke-dasharray="${filled.toFixed(1)} ${len}"/>
+      <svg class="gauge" width="30" height="18" viewBox="0 0 28 17" aria-hidden="true">
+        <path d="M2.5 14 A 11.5 11.5 0 0 1 25.5 14" fill="none" stroke="${color}" stroke-width="3" stroke-linecap="round"/>
+        <line x1="14" y1="14" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="${color}" stroke-width="2.4" stroke-linecap="round"/>
+        <circle cx="14" cy="14" r="1.9" fill="${color}"/>
       </svg>`;
   }
+
+  const chevronIcon = `
+    <svg width="12" height="8" viewBox="0 0 12 8" aria-hidden="true">
+      <path d="M1 1.5 L6 6.5 L11 1.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>`;
 
   // ----- Header -----
   document.getElementById("week-of").textContent = data.weekOf;
@@ -85,19 +98,18 @@
             <div class="avatar" style="${avatarStyle(i)}">${esc(initials(c.name))}</div>
             <div>
               <div class="p-name">${esc(c.name)}</div>
-              <div class="p-sub">${c.platform === "X" ? "𝕏" : "in"} · ${esc(c.headline)}</div>
+              <div class="p-sub">in · ${esc(c.headline)}</div>
             </div>
           </div>
         </td>
         <td>
           <div class="preview-box">
             <span>${esc(preview(c))}</span>
-            <button class="plus-btn" aria-label="View exhibit">+</button>
+            <button class="plus-btn" aria-label="Expand post and judges' notes">${chevronIcon}</button>
           </div>
         </td>
         <td class="eng-cell"><span class="eng-value">${fmt(engagementScore(c.exhibit))}</span>${barsIcon}</td>
-        <td class="slop-cell">${gaugeIcon(c.slopIndex)}<span class="slop-value">${c.slopIndex.toFixed(1)}</span></td>
-        <td class="expand-cell"><button class="expand-btn" aria-label="Expand exhibit">▼</button></td>
+        <td class="slop-cell">${gaugeIcon(c.slopIndex)}<span class="slop-value" style="color: ${slopColor(c.slopIndex)}">${c.slopIndex.toFixed(1)}</span></td>
       </tr>`)
     .join("");
 

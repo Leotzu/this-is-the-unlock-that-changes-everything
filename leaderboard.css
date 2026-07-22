@@ -212,7 +212,6 @@ tbody tr:hover {
 
 .col-rank { width: 5rem; }
 .col-eng, .col-slop { text-align: right; }
-.col-expand { width: 5rem; text-align: center; }
 
 /* Rank medals */
 .rank-badge {
@@ -349,7 +348,6 @@ tbody tr:hover {
 .slop-value {
   font-size: 1.25rem;
   font-weight: 800;
-  color: var(--purple);
   margin-left: 0.4rem;
 }
 
@@ -357,24 +355,9 @@ tbody tr:hover {
   vertical-align: -3px;
 }
 
-/* Expand */
-.expand-cell {
-  text-align: center;
-}
-
-.expand-btn {
-  background: none;
-  border: none;
-  color: var(--muted);
-  font-size: 1rem;
-  cursor: pointer;
-  padding: 0.4rem;
-  transition: transform 0.15s ease, color 0.15s ease;
-}
-
-tbody tr:hover .expand-btn {
-  color: var(--blue);
-  transform: translateY(2px);
+tbody tr:hover .plus-btn {
+  color: var(--text);
+  border-color: var(--blue);
 }
 
 /* Methodology row */

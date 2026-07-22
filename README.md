@@ -1,8 +1,6 @@
 # This Is The Unlock That Changes Everything
 
-A satirical AI slop website. Currently it says "You're Absolutely Right!" in big block letters, which is honestly all it needs to say.
-
-Live (eventually): [thisistheunlockthatchangeseverything.ai](https://thisistheunlockthatchangeseverything.ai)
+you're absolutely right.
 
 ## Running locally
 

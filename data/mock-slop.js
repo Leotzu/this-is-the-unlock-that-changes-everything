@@ -9,11 +9,12 @@
 window.SLOP_DATA = {
   season: 3,
   lastAppraisal: "2026-07-21T04:00:00Z",
+  weekOf: "Week of July 20 – July 26, 2026",
   stats: {
-    postsAppraised: 14286,
-    emDashesCatalogued: 96411,
-    letThatSinkIns: 3072,
-    repostsSolicited: 8951,
+    postsAnalyzed: 14286,
+    postsDeltaPct: 18.7,
+    avgSlopIndex: 94.8,
+    avgSlopDeltaPct: 6.3,
   },
   contestants: [
     {
@@ -28,9 +29,9 @@ window.SLOP_DATA = {
       signature: "The Vulnerability Arc",
       exhibit: {
         postedAgo: "2d",
-        reactions: "4,812",
-        comments: "312",
-        reposts: "1,004",
+        likes: 4812,
+        comments: 312,
+        reposts: 1004,
         analysis: ["3 em-dashes", "1 'let that sink in'", "1 unhoused mentor", "1 repost solicitation"],
         paragraphs: [
           { text: "I got rejected from 47 jobs in ONE week.",
@@ -61,9 +62,9 @@ window.SLOP_DATA = {
       signature: "The Grief-to-KPI Pivot",
       exhibit: {
         postedAgo: "5d",
-        reactions: "11,209",
-        comments: "847",
-        reposts: "2,318",
+        likes: 11209,
+        comments: 847,
+        reposts: 2318,
         analysis: ["1 deceased relative", "312% of quota", "3 hashtags", "0 shame detected"],
         paragraphs: [
           { text: "Yesterday, I buried my grandmother.",
@@ -92,9 +93,9 @@ window.SLOP_DATA = {
       signature: "The Raw, Unedited Paste",
       exhibit: {
         postedAgo: "1d",
-        reactions: "2,156",
-        comments: "94",
-        reposts: "521",
+        likes: 2156,
+        comments: 94,
+        reposts: 521,
         analysis: ["2 'delve's", "1 tapestry", "1 unremoved system artifact", "5 numbered platitudes"],
         paragraphs: [
           { text: "In today's fast-paced digital landscape, disruption isn't just a buzzword — it's a tapestry.",
@@ -121,9 +122,9 @@ window.SLOP_DATA = {
       signature: "The Parasocial Study Grind",
       exhibit: {
         postedAgo: "3d",
-        reactions: "18.2K",
-        comments: "1.1K",
-        reposts: "4.4K",
+        likes: 18200,
+        comments: 1100,
+        reposts: 4400,
         analysis: ["1,000 claimed hours", "1 'hit different'", "1 Notion template", "brains rewired: 0"],
         paragraphs: [
           { text: "I spent 1,000 hours studying MrBeast's first 100 videos so you don't have to.",
@@ -152,9 +153,9 @@ window.SLOP_DATA = {
       signature: "The Fabricated Dialogue",
       exhibit: {
         postedAgo: "1w",
-        reactions: "6,733",
-        comments: "402",
-        reposts: "988",
+        likes: 6733,
+        comments: 402,
+        reposts: 988,
         analysis: ["1 invented junior employee", "1 spontaneous office ovation", "1 trademarked virtue"],
         paragraphs: [
           { text: "A junior employee asked me yesterday: \"How are you so authentic?\"",
@@ -182,9 +183,9 @@ window.SLOP_DATA = {
       signature: "The Discipline LARP",
       exhibit: {
         postedAgo: "4d",
-        reactions: "9.7K",
-        comments: "2.3K",
-        reposts: "1.8K",
+        likes: 9700,
+        comments: 2300,
+        reposts: 1800,
         analysis: ["3:47am wake-up", "Marcus Aurelius at 3x speed", "$997 → free (17 min only)"],
         paragraphs: [
           { text: "While you were sleeping, I was up at 3:47am. Cold plunge. Dry fast. 400 pushups. Reading Marcus Aurelius (audiobook, 3x speed).",

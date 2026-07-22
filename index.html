@@ -3,16 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>This Is The Unlock That Changes Everything</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>You're Absolutely Slopped™ Leaderboard</title>
+  <link rel="stylesheet" href="leaderboard.css">
 </head>
 <body>
-  <main>
-    <h1>You're Absolutely Right!</h1>
-    <a class="leaderboard-link" href="leaderboard.html">
-      <span class="kicker">Official Rankings</span>
-      You're Absolutely Slopped™ Leaderboard →
-    </a>
-  </main>
+  <div class="page">
+
+    <header class="lb-head">
+      <div class="title-block">
+        <h1><span class="t-plain">You're Absolutely</span> <span class="t-gold">Slopped</span><span class="tm">™</span></h1>
+        <p class="tagline">Professional LinkedIn &amp; X Rankings</p>
+        <p class="standings">
+          <span class="trophy">🏆</span> Weekly Competitive Standings
+          <span class="sep">|</span>
+          <span id="week-of">—</span>
+        </p>
+      </div>
+      <div class="stat-cards" id="stat-cards"><!-- rendered by leaderboard.js --></div>
+    </header>
+
+    <section class="board">
+      <div class="table-scroll">
+        <table id="leaderboard">
+          <thead>
+            <tr>
+              <th class="col-rank">Rank</th>
+              <th>Poster</th>
+              <th>Post Preview</th>
+              <th class="col-eng">Engagement Score <span class="info" title="Engagement Score = (Likes × 1.0) + (Comments × 2.0) + (Reposts × 3.0)">ⓘ</span></th>
+              <th class="col-slop">Slop Index <span class="info" title="Slop Index = AI Buzzword Density + Vibe Overload + Original Thought Deficit">ⓘ</span></th>
+              <th class="col-expand">Expand</th>
+            </tr>
+          </thead>
+          <tbody><!-- rendered by leaderboard.js --></tbody>
+        </table>
+      </div>
+      <div class="method-row">
+        <span class="info">ⓘ</span>
+        <strong>Scoring Methodology:</strong>
+        Engagement Score = (Likes × 1.0) + (Comments × 2.0) + (Reposts × 3.0)
+        <span class="sep">|</span>
+        Slop Index = AI Buzzword Density + Vibe Overload + Original Thought Deficit
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      Officially sanctioned by the International Federation of Slop Appreciation (IFSA)
+      &middot; Season 3 &middot; Certified 100% Organic, Free-Range, Artisanal Slop
+      <span class="disclaimer">
+        All contestants and exhibits are fictional demonstration data pending our live
+        ingestion pipeline. Any resemblance to real thought leaders is statistically inevitable.
+      </span>
+    </footer>
+
+  </div>
+
+  <!-- Exhibit viewer modal -->
+  <div class="modal-backdrop" id="modal-backdrop" hidden>
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" id="modal-close" aria-label="Close exhibit">✕</button>
+      <div class="modal-content" id="modal-content"><!-- rendered by leaderboard.js --></div>
+    </div>
+  </div>
+
+  <script src="data/mock-slop.js"></script>
+  <script src="leaderboard.js"></script>
 </body>
 </html>

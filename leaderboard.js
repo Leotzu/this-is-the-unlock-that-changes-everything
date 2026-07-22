@@ -5,64 +5,99 @@
     return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
-  function tier(score) {
-    if (score >= 98) return "Michelin Slop ★★★";
-    if (score >= 95) return "Grand Cru";
-    if (score >= 92) return "Vintage Reserve";
-    return "Table Slop";
+  function fmt(n) {
+    return n.toLocaleString("en-US");
   }
 
-  function movementLabel(c) {
-    switch (c.movement) {
-      case "up": return `<span class="movement up">▲ ${c.movementAmount}</span>`;
-      case "down": return `<span class="movement down">▼ ${c.movementAmount}</span>`;
-      case "new": return `<span class="movement new">NEW</span>`;
-      default: return `<span class="movement steady">—</span>`;
-    }
+  // Official methodology: (Likes × 1.0) + (Comments × 2.0) + (Reposts × 3.0)
+  function engagementScore(ex) {
+    return ex.likes + ex.comments * 2 + ex.reposts * 3;
   }
 
   function initials(name) {
-    return name.split(/\s+/).map(w => w[0]).slice(0, 2).join("");
+    return name.split(/\s+/).map((w) => w[0]).slice(0, 2).join("");
   }
 
-  // ----- Stats bar -----
-  const stats = [
-    [data.stats.postsAppraised.toLocaleString("en-US"), "Posts Appraised"],
-    [data.stats.emDashesCatalogued.toLocaleString("en-US"), "Em-Dashes Catalogued"],
-    [data.stats.letThatSinkIns.toLocaleString("en-US"), "Things Let Sink In"],
-    [data.stats.repostsSolicited.toLocaleString("en-US"), "Reposts Solicited"],
-  ];
-  document.getElementById("stats-bar").innerHTML = stats
-    .map(([v, l]) => `<div class="stat"><div class="value">${v}</div><div class="label">${l}</div></div>`)
-    .join("");
+  function avatarStyle(i) {
+    const hue = (215 + i * 47) % 360;
+    return `background: linear-gradient(135deg, hsl(${hue}, 55%, 45%), hsl(${(hue + 40) % 360}, 60%, 30%));`;
+  }
 
-  document.getElementById("last-appraisal").textContent = new Date(data.lastAppraisal)
-    .toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+  function rankBadge(rank) {
+    const medal = { 1: "gold", 2: "silver", 3: "bronze" }[rank];
+    return medal
+      ? `<div class="rank-badge ${medal}">${rank}</div>`
+      : `<div class="rank-plain">${rank}</div>`;
+  }
+
+  function preview(c) {
+    const first = c.exhibit.paragraphs[0].text.replace(/\n+/g, " ");
+    return first.length > 58 ? first.slice(0, 58).trimEnd() + "…" : first;
+  }
+
+  const barsIcon = `
+    <svg class="bars" width="16" height="14" viewBox="0 0 16 14" aria-hidden="true">
+      <rect x="0" y="8" width="3.5" height="6" rx="1" fill="#4d8dff"/>
+      <rect x="6" y="4" width="3.5" height="10" rx="1" fill="#4d8dff"/>
+      <rect x="12" y="0" width="3.5" height="14" rx="1" fill="#4d8dff"/>
+    </svg>`;
+
+  function gaugeIcon(score) {
+    const len = 37.7; // arc length of the semicircle, r = 12
+    const filled = (score / 100) * len;
+    return `
+      <svg class="gauge" width="30" height="17" viewBox="0 0 28 16" aria-hidden="true">
+        <path d="M2 14 A 12 12 0 0 1 26 14" fill="none" stroke="#23386e" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M2 14 A 12 12 0 0 1 26 14" fill="none" stroke="#8b7bff" stroke-width="3.5" stroke-linecap="round"
+          stroke-dasharray="${filled.toFixed(1)} ${len}"/>
+      </svg>`;
+  }
+
+  // ----- Header -----
+  document.getElementById("week-of").textContent = data.weekOf;
+
+  document.getElementById("stat-cards").innerHTML = `
+    <div class="stat-card">
+      <div class="stat-icon">📈</div>
+      <div class="stat-body">
+        <div class="s-label">Total Posts Analyzed</div>
+        <div class="s-value">${fmt(data.stats.postsAnalyzed)}</div>
+        <div class="s-delta">▲ ${data.stats.postsDeltaPct}% vs last week</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">✨</div>
+      <div class="stat-body">
+        <div class="s-label">Average Slop Index</div>
+        <div class="s-value">${data.stats.avgSlopIndex.toFixed(1)}</div>
+        <div class="s-delta">▲ ${data.stats.avgSlopDeltaPct} vs last week</div>
+      </div>
+    </div>`;
 
   // ----- Table -----
   const tbody = document.querySelector("#leaderboard tbody");
   tbody.innerHTML = data.contestants
     .map((c, i) => `
-      <tr class="rank-${c.rank}">
+      <tr data-index="${i}">
+        <td>${rankBadge(c.rank)}</td>
         <td>
-          <div class="rank-cell">
-            <span class="rank-num">${c.rank}</span>
-            ${movementLabel(c)}
+          <div class="poster">
+            <div class="avatar" style="${avatarStyle(i)}">${esc(initials(c.name))}</div>
+            <div>
+              <div class="p-name">${esc(c.name)}</div>
+              <div class="p-sub">${c.platform === "X" ? "𝕏" : "in"} · ${esc(c.headline)}</div>
+            </div>
           </div>
         </td>
-        <td class="contestant">
-          <div class="name">${esc(c.name)}</div>
-          <div class="headline">${esc(c.headline)}</div>
+        <td>
+          <div class="preview-box">
+            <span>${esc(preview(c))}</span>
+            <button class="plus-btn" aria-label="View exhibit">+</button>
+          </div>
         </td>
-        <td><span class="platform-badge">${c.platform === "X" ? "𝕏" : "in"} ${esc(c.platform)}</span></td>
-        <td><span class="signature">“${esc(c.signature)}”</span></td>
-        <td class="score-cell">
-          <span class="score">${c.slopIndex.toFixed(1)}</span>
-          <span class="tier">${tier(c.slopIndex)}</span>
-        </td>
-        <td class="exhibit-cell">
-          <button class="view-exhibit" data-index="${i}">View Exhibit 🏆</button>
-        </td>
+        <td class="eng-cell"><span class="eng-value">${fmt(engagementScore(c.exhibit))}</span>${barsIcon}</td>
+        <td class="slop-cell">${gaugeIcon(c.slopIndex)}<span class="slop-value">${c.slopIndex.toFixed(1)}</span></td>
+        <td class="expand-cell"><button class="expand-btn" aria-label="Expand exhibit">▼</button></td>
       </tr>`)
     .join("");
 
@@ -70,7 +105,8 @@
   const backdrop = document.getElementById("modal-backdrop");
   const content = document.getElementById("modal-content");
 
-  function openExhibit(c) {
+  function openExhibit(i) {
+    const c = data.contestants[i];
     const notes = [];
     const paragraphs = c.exhibit.paragraphs
       .map((p) => {
@@ -85,16 +121,17 @@
       <div class="exhibit-label">Prized Exhibit — Rank ${c.rank} of ${data.contestants.length}</div>
       <div class="post-card">
         <div class="post-head">
-          <div class="avatar">${esc(initials(c.name))}</div>
+          <div class="avatar" style="${avatarStyle(i)}">${esc(initials(c.name))}</div>
           <div class="post-author">
-            <div class="p-name">${esc(c.name)}</div>
-            <div class="p-headline">${esc(c.headline)}</div>
-            <div class="p-meta">${c.exhibit.postedAgo} · 🌐 · ${esc(c.platform)}</div>
+            <div class="a-name">${esc(c.name)}</div>
+            <div class="a-headline">${esc(c.headline)}</div>
+            <div class="a-meta">${c.exhibit.postedAgo} · 🌐 · ${esc(c.platform)}</div>
           </div>
         </div>
         <div class="post-body">${paragraphs}</div>
         <div class="post-engagement">
-          👏💡❤️ ${c.exhibit.reactions} · ${c.exhibit.comments} comments · ${c.exhibit.reposts} reposts
+          👏💡❤️ ${fmt(c.exhibit.likes)} · ${fmt(c.exhibit.comments)} comments · ${fmt(c.exhibit.reposts)} reposts
+          · Engagement Score: ${fmt(engagementScore(c.exhibit))}
         </div>
       </div>
       <div class="notes-section">
@@ -113,16 +150,25 @@
 
     backdrop.hidden = false;
     document.body.style.overflow = "hidden";
+    history.replaceState(null, "", `#exhibit-${c.rank}`);
   }
 
   function closeExhibit() {
     backdrop.hidden = true;
     document.body.style.overflow = "";
+    history.replaceState(null, "", location.pathname);
+  }
+
+  // Deep link: /#exhibit-3 opens that rank's exhibit directly
+  const hashMatch = location.hash.match(/^#exhibit-(\d+)$/);
+  if (hashMatch) {
+    const idx = data.contestants.findIndex((c) => c.rank === Number(hashMatch[1]));
+    if (idx !== -1) openExhibit(idx);
   }
 
   tbody.addEventListener("click", (e) => {
-    const btn = e.target.closest(".view-exhibit");
-    if (btn) openExhibit(data.contestants[Number(btn.dataset.index)]);
+    const row = e.target.closest("tr[data-index]");
+    if (row) openExhibit(Number(row.dataset.index));
   });
 
   document.getElementById("modal-close").addEventListener("click", closeExhibit);
